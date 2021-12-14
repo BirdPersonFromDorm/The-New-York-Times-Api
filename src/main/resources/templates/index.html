@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Times</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link th:href="@{../css/main.css}" rel="stylesheet"/>
+
+<body>
+
+
+
+<div class="w3-content w3-container w3-padding-64" id="about">
+    <div class="nav">
+        <div class="select">
+            <select onchange="window.location.href = this.options[this.selectedIndex].value">
+                <option value="default" selected="selected">Select a category </option>
+                <option value="/?fq=Cars">Cars</option>
+                <option value="/?fq=Arts">Arts</option>
+                <option value="/?fq=Culture">Culture</option>
+
+            </select>
+        </div>
+    </div>
+    <div class="mainNews">
+        <ul class="cards">
+            <li class="cards_item" th:each="doc : ${temp.response.docs}">
+                <div class="card">
+                    <div class="card_image">
+                        <img th:src="'https://static01.nyt.com/' + ${doc.multimedia.get(0).legacy.xlarge}" alt="pic"/>
+                    </div>
+                    <div class="card_content">
+                        <h2 class="card_title" th:text="${doc.headLine.main}"></h2>
+
+                        <div class="card_text">
+                            <p th:text="${doc.firstParagraph}"></p>
+                            <p><span th:text="${doc.leadParagraph}"></span> </p>
+                        </div>
+                        <button class="card_btn orange">See more +</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
